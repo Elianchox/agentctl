@@ -1,5 +1,6 @@
 import * as p from "@clack/prompts";
 import { listAllResources } from "../core/manifest.ts";
+import { ResourceType } from "../core/types.ts";
 
 export async function list(resourcesRoot: string) {
   const resources = await listAllResources(resourcesRoot);
@@ -10,7 +11,7 @@ export async function list(resourcesRoot: string) {
   }
 
   const byType = { skill: [], agent: [], command: [] } as Record<
-    string,
+    ResourceType,
     typeof resources
   >;
   for (const r of resources) byType[r.type].push(r);

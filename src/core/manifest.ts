@@ -1,3 +1,4 @@
+import * as p from "@clack/prompts";
 import fs from "fs-extra";
 import path from "node:path";
 import type { ResourceManifest, ResourceType, Stack } from "./types.ts";
@@ -50,7 +51,7 @@ export async function listAllResources(
         const manifest = await readResourceManifest(dir);
         entries.push({ name, type, dir, manifest });
       } catch {
-        // carpeta sin meta.json válido: se ignora silenciosamente
+        p.log.warn(`Se omitió ${type} ${name}: no se pudo leer meta.json`);
       }
     }
   }
