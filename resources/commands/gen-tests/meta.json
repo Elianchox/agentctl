@@ -1,0 +1,6 @@
+{
+  "name": "gen-tests",
+  "type": "command",
+  "version": "1.0.0",
+  "description": "Slash command para generar tests del archivo actual."
+}

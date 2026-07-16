@@ -1,0 +1,27 @@
+import * as p from "@clack/prompts";
+import { listAllResources } from "../core/manifest.js";
+
+export async function list(resourcesRoot: string) {
+  const resources = await listAllResources(resourcesRoot);
+
+  if (resources.length === 0) {
+    p.log.info("No hay recursos en resources/ todavía.");
+    return;
+  }
+
+  const byType = { skill: [], agent: [], command: [] } as Record<
+    string,
+    typeof resources
+  >;
+  for (const r of resources) byType[r.type].push(r);
+
+  for (const [type, items] of Object.entries(byType)) {
+    if (items.length === 0) continue;
+    p.log.step(`${type}s:`);
+    for (const r of items) {
+      const stacks = r.manifest.stacks?.join(", ") ?? "genérico";
+      console.log(`  - ${r.name} (v${r.manifest.version}) [${stacks}]`);
+      console.log(`    ${r.manifest.description}`);
+    }
+  }
+}

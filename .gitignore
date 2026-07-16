@@ -1,0 +1,6 @@
+node_modules/
+dist/
+agentctl.lock.json
+.codegraph/
+graphify-out/
+.opencode/
