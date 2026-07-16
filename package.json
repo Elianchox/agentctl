@@ -4,7 +4,7 @@
   "description": "Instala tus propios agents, skills y commands de IA en cualquier proyecto, para múltiples CLIs (Claude Code, Codex, etc).",
   "type": "module",
   "bin": {
-    "agentctl": "./dist/cli.ts"
+    "agentctl": "./dist/cli.js"
   },
   "files": [
     "dist",
@@ -13,11 +13,11 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli.ts",
-    "start": "node dist/cli.ts"
+    "start": "node dist/cli.js",
+    "prepublishOnly": "pnpm build"
   },
   "dependencies": {
     "@clack/prompts": "^0.8.2",
-    "agentctl": "link:",
     "commander": "^12.1.0",
     "fs-extra": "^11.2.0"
   },
