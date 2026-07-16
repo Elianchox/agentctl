@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.8.2",
+    "agentctl": "link:",
     "commander": "^12.1.0",
     "fs-extra": "^11.2.0"
   },

@@ -6,22 +6,22 @@ CLI to install custom AI agents/skills/commands across AI CLIs (Claude Code, Cod
 
 ```bash
 # dev (no build needed)
-npm run dev -- init
-npm run dev -- add code-reviewer -t claude-code
-npm run dev -- list
+pnpm run dev -- init
+pnpm run dev -- add code-reviewer -t claude-code
+pnpm run dev -- list
 
 # build + global install
-npm run build
-npm link
+pnpm run build
+pnpm link
 agentctl init
 ```
 
-- Use `tsx src/cli.ts` directly if `npm run dev` args get weird with `--`
+- Use `tsx src/cli.ts` directly if `pnpm run dev` args get weird with `--`
 - No lint or test scripts configured. Typecheck: `npx tsc --noEmit`
 
 ## Build
 
-`npm run build` → `tsc` outputs to `dist/`. ESM (`"type": "module"`). Node >=18.
+`pnpm run build` → `tsc` outputs to `dist/`. ESM (`"type": "module"`). Node >=18.
 
 ## Architecture
 

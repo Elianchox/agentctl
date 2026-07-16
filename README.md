@@ -5,9 +5,9 @@ CLI para instalar **tus propios** agents, skills y slash commands de IA en cualq
 ## Instalación (desarrollo local)
 
 ```bash
-npm install
-npm run build
-npm link          # deja "agentctl" disponible globalmente en esta máquina
+pnpm install
+pnpm run build
+pnpm link          # deja "agentctl" disponible globalmente en esta máquina
 ```
 
 ## Uso
@@ -107,19 +107,19 @@ instalado en `agentctl.lock.json`. La próxima vez que corrés `add` o `init`:
 
 **Opción recomendada — publicar en npm:**
 ```bash
-npm login
-npm publish --access public
+pnpm login
+pnpm publish --access public
 ```
 Después, en cualquier máquina:
 ```bash
 npx agentctl init
 # o instalado global:
-npm install -g agentctl
+pnpm add -g agentctl
 ```
 
 **Sin publicar — instalar directo desde GitHub:**
 ```bash
-npm install -g github:tu-usuario/agentctl
+pnpm add -g github:tu-usuario/agentctl
 ```
 
 ## Próximos pasos sugeridos
