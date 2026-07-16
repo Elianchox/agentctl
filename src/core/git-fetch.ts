@@ -3,7 +3,7 @@ import { promisify } from "node:util";
 import fs from "fs-extra";
 import path from "node:path";
 import os from "node:os";
-import type { GitSource } from "./types.js";
+import type { GitSource } from "./types.ts";
 
 const run = promisify(execFile);
 

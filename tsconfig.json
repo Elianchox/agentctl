@@ -10,7 +10,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "declaration": false
+    "declaration": false,
+    "rewriteRelativeImportExtensions": true
   },
   "include": ["src/**/*"]
 }

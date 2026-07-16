@@ -1,8 +1,8 @@
 import * as p from "@clack/prompts";
-import { detectStacks } from "../core/detector.js";
-import { listAllResources, filterByStacks } from "../core/manifest.js";
-import { installResource } from "../core/installer.js";
-import { adapters } from "../adapters/index.js";
+import { detectStacks } from "../core/detector.ts";
+import { listAllResources, filterByStacks } from "../core/manifest.ts";
+import { installResource } from "../core/installer.ts";
+import { adapters } from "../adapters/index.ts";
 
 export async function init(projectDir: string, resourcesRoot: string) {
   p.intro("agentctl init");

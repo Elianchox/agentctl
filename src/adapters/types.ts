@@ -1,4 +1,4 @@
-import type { ResourceType } from "../core/types.js";
+import type { ResourceType } from "../core/types.ts";
 
 export interface Adapter {
   /** Identificador usado en --target y en el lockfile, ej: "claude-code" */

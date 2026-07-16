@@ -2,9 +2,9 @@
 import { Command } from "commander";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { init } from "./commands/init.js";
-import { add } from "./commands/add.js";
-import { list } from "./commands/list.js";
+import { init } from "./commands/init.ts";
+import { add } from "./commands/add.ts";
+import { list } from "./commands/list.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

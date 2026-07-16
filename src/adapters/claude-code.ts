@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import path from "node:path";
-import type { Adapter } from "./types.js";
+import type { Adapter } from "./types.ts";
 
 const TARGET_FOLDER = {
   skill: "skills",

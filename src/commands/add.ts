@@ -1,7 +1,7 @@
 import * as p from "@clack/prompts";
-import { listAllResources } from "../core/manifest.js";
-import { installResource } from "../core/installer.js";
-import { adapters, getAdapter } from "../adapters/index.js";
+import { listAllResources } from "../core/manifest.ts";
+import { installResource } from "../core/installer.ts";
+import { adapters, getAdapter } from "../adapters/index.ts";
 
 interface AddOptions {
   target?: string; // ej: "claude-code,codex"

@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import path from "node:path";
-import type { ResourceManifest, ResourceType, Stack } from "./types.js";
-import { resolveGitSource } from "./git-fetch.js";
+import type { ResourceManifest, ResourceType, Stack } from "./types.ts";
+import { resolveGitSource } from "./git-fetch.ts";
 
 const TYPE_FOLDERS: Record<ResourceType, string> = {
   skill: "skills",

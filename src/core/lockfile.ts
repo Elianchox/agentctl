@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import path from "node:path";
-import type { LockFile, LockEntry } from "./types.js";
+import type { LockFile, LockEntry } from "./types.ts";
 
 const LOCK_FILENAME = "agentctl.lock.json";
 

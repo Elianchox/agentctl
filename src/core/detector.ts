@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import path from "node:path";
-import type { Stack } from "./types.js";
+import type { Stack } from "./types.ts";
 
 /**
  * Marcadores por stack. Un string sin punto inicial se busca como archivo exacto,
@@ -11,7 +11,7 @@ const MARKERS: Record<Stack, string[]> = {
   python: ["pyproject.toml", "requirements.txt", "setup.py"],
   go: ["go.mod"],
   node: ["package.json"],
-  "expo-react-native": ["app.json", "app.config.js", "app.config.ts"],
+  "expo-react-native": ["app.json", "app.config.ts", "app.config.ts"],
 };
 
 export async function detectStacks(projectDir: string): Promise<Stack[]> {

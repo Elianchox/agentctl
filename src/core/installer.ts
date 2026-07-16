@@ -1,8 +1,8 @@
-import type { Adapter } from "../adapters/types.js";
-import type { ResourceEntry } from "./manifest.js";
-import { resolveResourceDir } from "./manifest.js";
-import { hashPath } from "./hash.js";
-import { upsertLockEntry, readLockFile } from "./lockfile.js";
+import type { Adapter } from "../adapters/types.ts";
+import type { ResourceEntry } from "./manifest.ts";
+import { resolveResourceDir } from "./manifest.ts";
+import { hashPath } from "./hash.ts";
+import { upsertLockEntry, readLockFile } from "./lockfile.ts";
 
 export interface InstallResult {
   resourceName: string;

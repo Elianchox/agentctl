@@ -1,5 +1,5 @@
 import * as p from "@clack/prompts";
-import { listAllResources } from "../core/manifest.js";
+import { listAllResources } from "../core/manifest.ts";
 
 export async function list(resourcesRoot: string) {
   const resources = await listAllResources(resourcesRoot);

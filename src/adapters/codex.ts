@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import path from "node:path";
-import type { Adapter } from "./types.js";
+import type { Adapter } from "./types.ts";
 
 /**
  * Adapter de ejemplo para Codex CLI. Ajustá las rutas reales según
