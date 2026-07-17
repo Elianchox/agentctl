@@ -18,9 +18,7 @@ export const claudeCodeAdapter: Adapter = {
 
   destPath(resourceName, type, projectDir) {
     const base = path.join(projectDir, ".claude", TARGET_FOLDER[type]);
-    return type === "command"
-      ? path.join(base, `${resourceName}.md`)
-      : path.join(base, resourceName);
+    return path.join(base, resourceName)
   },
 
   async install(resourceDir, resourceName, type, projectDir) {
@@ -32,7 +30,6 @@ export const claudeCodeAdapter: Adapter = {
       if (await fs.pathExists(mdFile)) {
         await fs.copy(mdFile, dest);
       } else {
-        // fallback: copiar toda la carpeta si no sigue la convención de un solo .md
         await fs.copy(resourceDir, dest);
       }
     } else {
