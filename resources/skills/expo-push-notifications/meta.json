@@ -3,5 +3,5 @@
   "type": "skill",
   "version": "1.0.0",
   "description": "Patrones para implementar push notifications con Expo Push Service y FCM en apps React Native.",
-  "stacks": ["expo-react-native", "node"]
+  "stacks": ["expo"]
 }

@@ -10,11 +10,6 @@ const TARGET_FOLDER: Record<ResourceType, string> = {
   plugin: "plugins"
 } as const;
 
-/**
- * Adapter de ejemplo para Codex CLI. Ajustá las rutas reales según
- * la convención que use la versión de Codex que uses — este es un
- * punto de partida razonable: todo bajo .codex/<tipo>/.
- */
 export const codexAdapter: Adapter = {
   name: "codex",
   label: "Codex CLI",

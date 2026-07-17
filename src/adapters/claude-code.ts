@@ -15,7 +15,8 @@ export const claudeCodeAdapter: Adapter = {
   label: "Claude Code",
 
   async detect(projectDir) {
-    return fs.pathExists(path.join(projectDir, ".claude"));
+    const hasClaudeDir = await fs.pathExists(path.join(projectDir, ".claude"));
+    return hasClaudeDir;
   },
 
   destPath(resourceName, type, projectDir) {

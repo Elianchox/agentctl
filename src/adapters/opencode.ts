@@ -15,7 +15,8 @@ export const opencodeAdapter: Adapter = {
   label: "OpenCode CLI",
 
   async detect(projectDir) {
-    return fs.pathExists(path.join(projectDir, ".opencode"));
+    const hasOpencodeDir = await fs.pathExists(path.join(projectDir, ".opencode"));
+    return hasOpencodeDir;
   },
 
   destPath(resourceName, type, projectDir) {
@@ -25,6 +26,6 @@ export const opencodeAdapter: Adapter = {
 
   async install(resourceDir, resourceName, type, projectDir) {
     const dest = this.destPath(resourceName, type, projectDir);
-    fs.copy(resourceDir, dest)
+    await fs.copy(resourceDir, dest)
   },
 };

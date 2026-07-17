@@ -5,7 +5,11 @@ export type Stack =
   | "python"
   | "go"
   | "node"
-  | "expo-react-native";
+  | "react"
+  | "react-native"
+  | "expo"
+  | "nextjs"
+  | "astro";
 
 /** De dónde sale el contenido real de un recurso */
 export interface GitSource {
