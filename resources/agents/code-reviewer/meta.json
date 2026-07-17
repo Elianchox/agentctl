@@ -1,6 +1,0 @@
-{
-  "name": "code-reviewer",
-  "type": "agent",
-  "version": "1.0.0",
-  "description": "Agente que revisa PRs siguiendo la arquitectura FDA (features/shared/dal/infrastructure)."
-}
