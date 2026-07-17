@@ -14,8 +14,7 @@ export async function init(projectDir: string, resourcesRoot: string) {
       : "No se detectó un stack conocido (se sugerirán solo recursos genéricos)"
   );
 
-  // 1. Detectar qué CLIs ya están presentes en el proyecto, para preseleccionarlas
-  const presence = await Promise.all(
+  const presenceCLI = await Promise.all(
     adapters.map(async (a) => ({ adapter: a, present: await a.detect(projectDir) }))
   );
 
@@ -24,11 +23,11 @@ export async function init(projectDir: string, resourcesRoot: string) {
     options: adapters.map((a) => ({
       value: a.name,
       label: a.label,
-      hint: presence.find((d) => d.adapter.name === a.name)?.present
+      hint: presenceCLI.find((d) => d.adapter.name === a.name)?.present
         ? "detectado en el proyecto"
         : undefined,
     })),
-    initialValues: presence.filter((d) => d.present).map((d) => d.adapter.name),
+    initialValues: presenceCLI.filter((d) => d.present).map((d) => d.adapter.name),
   });
 
   if (p.isCancel(selectedTargets)) {
@@ -45,9 +44,6 @@ export async function init(projectDir: string, resourcesRoot: string) {
     return;
   }
 
-  // 2. Sugerir recursos según el stack detectado.
-  // Los marcados como `required` se instalan siempre y no se ofrecen
-  // como opción deseleccionable (ej: skills de Superpowers).
   const allResources = await listAllResources(resourcesRoot);
   const relevant = filterByStacks(allResources, stacks);
   const requiredResources = relevant.filter((r) => r.manifest.required);
@@ -89,7 +85,6 @@ export async function init(projectDir: string, resourcesRoot: string) {
     return;
   }
 
-  // 3. Instalar cada recurso en cada target seleccionado
   for (const target of targets) {
     const spinner = p.spinner();
     spinner.start(`Instalando en ${target.label}...`);
