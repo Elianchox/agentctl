@@ -1,4 +1,4 @@
-export type ResourceType = "skill" | "agent" | "command";
+export type ResourceType = "skill" | "agent" | "command" | "plugin";
 
 export type Stack =
   | "dotnet"

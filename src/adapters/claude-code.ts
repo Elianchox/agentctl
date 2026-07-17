@@ -1,11 +1,13 @@
 import fs from "fs-extra";
 import path from "node:path";
 import type { Adapter } from "./types.ts";
+import { ResourceType } from "../core/types.ts";
 
-const TARGET_FOLDER = {
+const TARGET_FOLDER: Record<ResourceType, string> = {
   skill: "skills",
   agent: "agents",
   command: "commands",
+  plugin: "plugins"
 } as const;
 
 export const claudeCodeAdapter: Adapter = {
