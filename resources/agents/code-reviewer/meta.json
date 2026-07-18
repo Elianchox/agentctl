@@ -1,0 +1,6 @@
+{
+  "name": "code-reviewer",
+  "type": "agent",
+  "version": "1.0.0",
+  "description": "Subagente code reviewer — revisa cambios, identifica problemas, aplica fixes y puede hacer commits con aprobación."
+}

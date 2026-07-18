@@ -4,3 +4,4 @@ agentctl.lock.json
 .codegraph/
 graphify-out/
 .opencode/
+docs/superpowers/*
