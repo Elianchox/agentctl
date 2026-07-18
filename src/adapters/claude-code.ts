@@ -1,11 +1,13 @@
 import fs from "fs-extra";
 import path from "node:path";
 import type { Adapter } from "./types.ts";
+import { ResourceType } from "../core/types.ts";
 
-const TARGET_FOLDER = {
+const TARGET_FOLDER: Record<ResourceType, string> = {
   skill: "skills",
   agent: "agents",
   command: "commands",
+  plugin: "plugins"
 } as const;
 
 export const claudeCodeAdapter: Adapter = {
@@ -13,14 +15,13 @@ export const claudeCodeAdapter: Adapter = {
   label: "Claude Code",
 
   async detect(projectDir) {
-    return fs.pathExists(path.join(projectDir, ".claude"));
+    const hasClaudeDir = await fs.pathExists(path.join(projectDir, ".claude"));
+    return hasClaudeDir;
   },
 
   destPath(resourceName, type, projectDir) {
     const base = path.join(projectDir, ".claude", TARGET_FOLDER[type]);
-    return type === "command"
-      ? path.join(base, `${resourceName}.md`)
-      : path.join(base, resourceName);
+    return path.join(base, resourceName)
   },
 
   async install(resourceDir, resourceName, type, projectDir) {
@@ -32,7 +33,6 @@ export const claudeCodeAdapter: Adapter = {
       if (await fs.pathExists(mdFile)) {
         await fs.copy(mdFile, dest);
       } else {
-        // fallback: copiar toda la carpeta si no sigue la convención de un solo .md
         await fs.copy(resourceDir, dest);
       }
     } else {

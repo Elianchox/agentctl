@@ -1,0 +1,6 @@
+{
+  "name": "coder",
+  "type": "agent",
+  "version": "1.0.0",
+  "description": "Subagente coder — toma un plan de implementación y ejecuta los cambios en el código. Pregunta antes de proceder."
+}

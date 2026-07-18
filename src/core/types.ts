@@ -1,11 +1,15 @@
-export type ResourceType = "skill" | "agent" | "command";
+export type ResourceType = "skill" | "agent" | "command" | "plugin";
 
 export type Stack =
   | "dotnet"
   | "python"
   | "go"
   | "node"
-  | "expo-react-native";
+  | "react"
+  | "react-native"
+  | "expo"
+  | "nextjs"
+  | "astro";
 
 /** De dónde sale el contenido real de un recurso */
 export interface GitSource {

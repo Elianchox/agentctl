@@ -10,21 +10,22 @@ const TARGET_FOLDER: Record<ResourceType, string> = {
   plugin: "plugins"
 } as const;
 
-export const codexAdapter: Adapter = {
-  name: "codex",
-  label: "Codex CLI",
+export const opencodeAdapter: Adapter = {
+  name: "opencode",
+  label: "OpenCode CLI",
 
   async detect(projectDir) {
-    const hasCodexDir = await fs.pathExists(path.join(projectDir, ".codex"));
-    return hasCodexDir;
+    const hasOpencodeDir = await fs.pathExists(path.join(projectDir, ".opencode"));
+    return hasOpencodeDir;
   },
 
   destPath(resourceName, type, projectDir) {
-    return path.join(projectDir, ".codex", TARGET_FOLDER[type], resourceName);
+    const base = path.join(projectDir, ".opencode", TARGET_FOLDER[type]);
+    return path.join(base, resourceName)
   },
 
   async install(resourceDir, resourceName, type, projectDir) {
     const dest = this.destPath(resourceName, type, projectDir);
-    await fs.copy(resourceDir, dest);
+    await fs.copy(resourceDir, dest)
   },
 };

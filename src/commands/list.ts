@@ -10,7 +10,7 @@ export async function list(resourcesRoot: string) {
     return;
   }
 
-  const byType = { skill: [], agent: [], command: [] } as Record<
+  const byType = { skill: [], agent: [], command: [], plugin: [] } as Record<
     ResourceType,
     typeof resources
   >;

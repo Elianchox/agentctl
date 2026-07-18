@@ -8,6 +8,7 @@ const TYPE_FOLDERS: Record<ResourceType, string> = {
   skill: "skills",
   agent: "agents",
   command: "commands",
+  plugin: "plugins"
 };
 
 export interface ResourceEntry {
@@ -17,7 +18,6 @@ export interface ResourceEntry {
   manifest: ResourceManifest;
 }
 
-/** Lee el meta.json de un recurso puntual dentro de resources/<tipo>s/<nombre>/ */
 export async function readResourceManifest(
   resourceDir: string
 ): Promise<ResourceManifest> {
@@ -28,7 +28,6 @@ export async function readResourceManifest(
   return fs.readJson(metaPath);
 }
 
-/** Lista todos los recursos disponibles en el repo fuente (resources/) */
 export async function listAllResources(
   resourcesRoot: string
 ): Promise<ResourceEntry[]> {
