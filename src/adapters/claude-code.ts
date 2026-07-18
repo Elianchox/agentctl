@@ -7,7 +7,6 @@ const TARGET_FOLDER: Record<ResourceType, string> = {
   skill: "skills",
   agent: "agents",
   command: "commands",
-  plugin: "plugins"
 } as const;
 
 export const claudeCodeAdapter: Adapter = {

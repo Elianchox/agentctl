@@ -8,7 +8,6 @@ const TYPE_FOLDERS: Record<ResourceType, string> = {
   skill: "skills",
   agent: "agents",
   command: "commands",
-  plugin: "plugins"
 };
 
 export interface ResourceEntry {
