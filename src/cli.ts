@@ -5,6 +5,12 @@ import { fileURLToPath } from "node:url";
 import { init } from "./commands/init.ts";
 import { add } from "./commands/add.ts";
 import { list } from "./commands/list.ts";
+import {
+  sourceAdd,
+  sourceRemove,
+  sourceSetDefault,
+  sourceList,
+} from "./commands/source.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -39,5 +45,29 @@ program
   .command("list")
   .description("Lista todos los recursos disponibles en el repo fuente")
   .action(() => list(resourcesRoot));
+
+const source = program
+  .command("source")
+  .description("Gestiona repositorios de recursos");
+
+source
+  .command("add <alias> <repo>")
+  .description("Agrega una source de recursos")
+  .action(sourceAdd);
+
+source
+  .command("remove <alias>")
+  .description("Elimina una source de recursos")
+  .action(sourceRemove);
+
+source
+  .command("set-default <alias>")
+  .description("Define qué source de usuario se usa en init")
+  .action(sourceSetDefault);
+
+source
+  .command("list")
+  .description("Lista todas las sources configuradas")
+  .action(sourceList);
 
 program.parse();
