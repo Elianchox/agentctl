@@ -35,11 +35,9 @@ program
 program
   .command("add <resource>")
   .description("Instala un recurso puntual por nombre")
-  .option("-t, --target <targets>", "targets separados por coma, ej: claude-code,codex")
+  .option("-t, --target <targets>", "targets separados por coma, ej: opencode")
   .option("-f, --force", "sobreescribe aunque el recurso haya sido editado a mano")
-  .action((resource, options) =>
-    add(resource, process.cwd(), resourcesRoot, options)
-  );
+  .action((resource, options) => add(resource, process.cwd(), options));
 
 program
   .command("list")
