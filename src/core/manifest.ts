@@ -2,6 +2,7 @@ import * as p from "@clack/prompts";
 import fs from "fs-extra";
 import path from "node:path";
 import type { ResourceManifest, ResourceType, Stack } from "./types.ts";
+import type { SourceEntry } from "./sources.ts";
 import { resolveGitSource } from "./git-fetch.ts";
 
 const TYPE_FOLDERS: Record<ResourceType, string> = {
@@ -15,6 +16,10 @@ export interface ResourceEntry {
   type: ResourceType;
   dir: string;
   manifest: ResourceManifest;
+  /** Alias de la source de origen. Undefined si es del root local (legacy). */
+  sourceAlias?: string;
+  /** "alias/nombre" si tiene sourceAlias, sino "nombre" */
+  displayName: string;
 }
 
 export async function readResourceManifest(
@@ -47,7 +52,7 @@ export async function listAllResources(
 
       try {
         const manifest = await readResourceManifest(dir);
-        entries.push({ name, type, dir, manifest });
+        entries.push({ name, type, dir, manifest, displayName: name });
       } catch {
         p.log.warn(`Se omitió ${type} ${name}: no se pudo leer meta.json`);
       }
@@ -74,6 +79,25 @@ export function filterByStacks(
     if (!r.manifest.stacks || r.manifest.stacks.length === 0) return true;
     return r.manifest.stacks.some((s) => detectedStacks.includes(s));
   });
+}
+
+/**
+ * Agrega recursos de múltiples sources cacheadas. Anota cada entrada con
+ * sourceAlias y displayName = "alias/nombre".
+ */
+export async function listResourcesFromSources(
+  sources: SourceEntry[]
+): Promise<ResourceEntry[]> {
+  const all: ResourceEntry[] = [];
+  for (const source of sources) {
+    const resources = await listAllResources(source.dir);
+    for (const r of resources) {
+      r.sourceAlias = source.alias;
+      r.displayName = `${source.alias}/${r.name}`;
+    }
+    all.push(...resources);
+  }
+  return all;
 }
 
 /**
