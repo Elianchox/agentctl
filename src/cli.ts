@@ -28,9 +28,9 @@ program
   .version("0.1.0");
 
 program
-  .command("init")
-  .description("Detecta el stack del proyecto y configura agents/skills/commands")
-  .action(() => init(process.cwd(), resourcesRoot));
+  .command("init [repo]")
+  .description("Configura agents/skills/commands. Opcional: URL de repo para usar una vez.")
+  .action((repo?: string) => init(process.cwd(), repo));
 
 program
   .command("add <resource>")
