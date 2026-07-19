@@ -1,12 +1,19 @@
 import * as p from "@clack/prompts";
-import { listAllResources } from "../core/manifest.ts";
+import { listResourcesFromSources } from "../core/manifest.ts";
+import { getSources, refreshAllSources } from "../core/sources.ts";
 import { ResourceType } from "../core/types.ts";
 
-export async function list(resourcesRoot: string) {
-  const resources = await listAllResources(resourcesRoot);
+export async function list() {
+  const sp = p.spinner();
+  sp.start("Actualizando caché de sources...");
+  await refreshAllSources();
+  sp.stop("Caché actualizada.");
+
+  const sources = await getSources();
+  const resources = await listResourcesFromSources(sources);
 
   if (resources.length === 0) {
-    p.log.info("No hay recursos en resources/ todavía.");
+    p.log.info("No hay recursos disponibles en ninguna source.");
     return;
   }
 
@@ -21,7 +28,7 @@ export async function list(resourcesRoot: string) {
     p.log.step(`${type}s:`);
     for (const r of items) {
       const stacks = r.manifest.stacks?.join(", ") ?? "genérico";
-      console.log(`  - ${r.name} (v${r.manifest.version}) [${stacks}]`);
+      console.log(`  - ${r.displayName} (v${r.manifest.version}) [${stacks}]`);
       console.log(`    ${r.manifest.description}`);
     }
   }

@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { init } from "./commands/init.ts";
 import { add } from "./commands/add.ts";
 import { list } from "./commands/list.ts";
@@ -11,12 +9,6 @@ import {
   sourceSetDefault,
   sourceList,
 } from "./commands/source.ts";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// resources/ vive un nivel arriba de dist/ cuando se compila,
-// o al lado de src/ en modo desarrollo con tsx.
-const resourcesRoot = path.resolve(__dirname, "..", "resources");
 
 const program = new Command();
 
@@ -41,8 +33,8 @@ program
 
 program
   .command("list")
-  .description("Lista todos los recursos disponibles en el repo fuente")
-  .action(() => list(resourcesRoot));
+  .description("Lista todos los recursos disponibles en todas las sources")
+  .action(() => list());
 
 const source = program
   .command("source")
