@@ -88,3 +88,15 @@ export interface ToolLockEntry {
   targets: Record<string, ToolTargetState>;
   installedAt: string;
 }
+
+export interface SourceConfig {
+  alias: string;
+  repo: string;
+}
+
+export interface UserSourcesFile {
+  /** Alias del SourceConfig a usar en `init`. Opcional. */
+  default?: string;
+  /** Repos de usuario (nunca incluye el oficial) */
+  sources: SourceConfig[];
+}
