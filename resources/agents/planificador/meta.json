@@ -1,6 +1,0 @@
-{
-  "name": "planificador",
-  "type": "agent",
-  "version": "1.0.0",
-  "description": "Subagente planificador — analiza el proyecto y genera planes de implementación detallados. No toca código fuente."
-}
