@@ -48,4 +48,43 @@ export interface LockEntry {
 
 export interface LockFile {
   resources: Record<string, LockEntry>;
+  tools?: Record<string, ToolLockEntry>;
+}
+
+export type InstallMethod =
+  | { brew: string }
+  | { npm: string }
+  | { uv: string }
+  | { pipx: string }
+  | { script: string };
+
+export interface ToolPlugin {
+  [target: string]: string;
+}
+
+export interface ToolConfig {
+  name: string;
+  desc?: string;
+  install?: InstallMethod;
+  setup?: string[];
+  plugin?: ToolPlugin;
+  targets?: string[];
+}
+
+export interface AgentctlConfig {
+  $schema?: string;
+  tools: ToolConfig[];
+  resources?: string[] | "*";
+}
+
+export interface ToolTargetState {
+  setupDone: boolean;
+  pluginRegistered: boolean;
+}
+
+export interface ToolLockEntry {
+  version: string;
+  binaryPath?: string;
+  targets: Record<string, ToolTargetState>;
+  installedAt: string;
 }

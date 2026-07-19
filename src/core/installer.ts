@@ -2,7 +2,7 @@ import type { Adapter } from "../adapters/types.ts";
 import type { ResourceEntry } from "./manifest.ts";
 import { resolveResourceDir } from "./manifest.ts";
 import { hashPath } from "./hash.ts";
-import { upsertLockEntry, readLockFile } from "./lockfile.ts";
+import { upsertLockEntry, getLockEntry } from "./lockfile.ts";
 
 export interface InstallResult {
   resourceName: string;
@@ -35,8 +35,7 @@ export async function installResource(
   const alwaysLatest = resource.manifest.alwaysLatest === true;
 
   const installedHash = await hashPath(destPath);
-  const lockFile = await readLockFile(projectDir);
-  const lockEntry = lockFile.resources[lockKey];
+  const lockEntry = await getLockEntry(projectDir, lockKey);
 
   const wasModifiedByUser =
     !alwaysLatest &&

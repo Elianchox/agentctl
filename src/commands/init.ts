@@ -2,6 +2,7 @@ import * as p from "@clack/prompts";
 import { detectStacks } from "../core/detector.ts";
 import { listAllResources, filterByStacks } from "../core/manifest.ts";
 import { installResource } from "../core/installer.ts";
+import { readAgentctlConfig, provisionTools } from "../core/provisioner.ts";
 import { adapters } from "../adapters/index.ts";
 
 export async function init(projectDir: string, resourcesRoot: string) {
@@ -44,6 +45,13 @@ export async function init(projectDir: string, resourcesRoot: string) {
     return;
   }
 
+  const agentctlConfig = await readAgentctlConfig(resourcesRoot);
+  if (agentctlConfig) {
+    await provisionTools(agentctlConfig, targets, projectDir);
+  } else {
+    p.log.info("No hay agentctl.json en resources/. Solo se instalarán resources locales.");
+  }
+
   const allResources = await listAllResources(resourcesRoot);
   const relevant = filterByStacks(allResources, stacks);
   const requiredResources = relevant.filter((r) => r.manifest.required);
@@ -81,7 +89,9 @@ export async function init(projectDir: string, resourcesRoot: string) {
   }
 
   if (resourcesToInstall.length === 0) {
-    p.outro("No hay recursos disponibles en resources/ todavía.");
+    p.outro(
+      `✅ Instalado en: ${targets.map((t) => t.label).join(", ")}.`
+    );
     return;
   }
 

@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import path from "node:path";
-import type { LockFile, LockEntry } from "./types.ts";
+import type { LockFile, LockEntry, ToolLockEntry } from "./types.ts";
 
 const LOCK_FILENAME = "agentctl.lock.json";
 
@@ -33,13 +33,33 @@ export async function upsertLockEntry(
   await writeLockFile(projectDir, lockFile);
 }
 
-/**
- * Compara el hash actual del recurso instalado contra el hash guardado
- * en el lockfile. Devuelve:
- * - "not-installed" si nunca se instaló
- * - "modified" si el hash difiere (alguien lo editó a mano, o hay update disponible)
- * - "up-to-date" si coincide
- */
+export async function getLockEntry(
+  projectDir: string,
+  resourceName: string
+): Promise<LockEntry | undefined> {
+  const lockFile = await readLockFile(projectDir);
+  return lockFile.resources[resourceName];
+}
+
+export async function upsertToolLockEntry(
+  projectDir: string,
+  toolName: string,
+  entry: ToolLockEntry
+): Promise<void> {
+  const lockFile = await readLockFile(projectDir);
+  lockFile.tools = lockFile.tools ?? {};
+  lockFile.tools[toolName] = entry;
+  await writeLockFile(projectDir, lockFile);
+}
+
+export async function getToolLockEntry(
+  projectDir: string,
+  toolName: string
+): Promise<ToolLockEntry | undefined> {
+  const lockFile = await readLockFile(projectDir);
+  return lockFile.tools?.[toolName];
+}
+
 export async function checkResourceStatus(
   projectDir: string,
   resourceName: string,

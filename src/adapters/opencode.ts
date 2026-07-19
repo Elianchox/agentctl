@@ -1,7 +1,9 @@
+import * as p from "@clack/prompts";
 import fs from "fs-extra";
 import path from "node:path";
 import type { Adapter } from "./types.ts";
 import { ResourceType } from "../core/types.ts";
+import { copyResourceContent } from "./utils.ts";
 
 const TARGET_FOLDER: Record<ResourceType, string> = {
   skill: "skills",
@@ -25,6 +27,25 @@ export const opencodeAdapter: Adapter = {
 
   async install(resourceDir, resourceName, type, projectDir) {
     const dest = this.destPath(resourceName, type, projectDir);
-    await fs.copy(resourceDir, dest)
+    await copyResourceContent(resourceDir, dest);
+  },
+
+  async installPlugin(pluginSpec, projectDir) {
+    const configPath = path.join(projectDir, ".opencode", "opencode.json");
+
+    await fs.ensureDir(path.join(projectDir, ".opencode"));
+
+    let config: { plugin?: string[] } = {};
+    if (await fs.pathExists(configPath)) {
+      config = await fs.readJson(configPath);
+    }
+
+    config.plugin = config.plugin ?? [];
+
+    if (!config.plugin.includes(pluginSpec)) {
+      config.plugin.push(pluginSpec);
+      await fs.writeJson(configPath, config, { spaces: 2 });
+      p.log.info(`  Plugin registrado en OpenCode: ${pluginSpec}`);
+    }
   },
 };

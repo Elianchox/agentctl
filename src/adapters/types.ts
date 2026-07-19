@@ -15,4 +15,5 @@ export interface Adapter {
     type: ResourceType,
     projectDir: string
   ): Promise<void>;
+  installPlugin?(pluginSpec: string, projectDir: string): Promise<void>;
 }
