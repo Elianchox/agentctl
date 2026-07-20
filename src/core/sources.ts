@@ -7,7 +7,7 @@ import type { UserSourcesFile } from "./types.ts";
 
 const run = promisify(execFile);
 
-const OFFICIAL_REPO = "agentctl/agentctl-resources";
+const OFFICIAL_REPO = "https://github.com/Elianchox/agentctl-resources.git";
 const OFFICIAL_ALIAS = "_oficial";
 
 const ALIAS_RE = /^[a-zA-Z0-9_-]+$/;
